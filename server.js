@@ -1,19 +1,12 @@
 /* globals require */
+
 var express = require("express"),
     http = require("http"),
     path = require("path"),
     mdata = require("remedata"),
     app = express();
 
-app.configure(function () {
-    // Define our static file directory, it will be the root of the site
-    app.use('/public/',express.static(path.join(__dirname, '/')));
-    app.use(express.bodyParser({
-          keepExtensions: true,
-          limit: 1000000000, //1G
-          defer: true
-    }));
-});
+app.use('/public/',express.static(path.join(__dirname, '/')));
 
 
 http.createServer(app).listen(8090, function(){

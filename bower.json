@@ -1,10 +1,10 @@
 {
-  "name": "encender",
+  "name": "escaparate",
   "version": "0.0.1",
   "authors": [
     "Iwan van der Kleijn <iwanvanderkleijn@gmail.com>"
   ],
-  "description": "Capa de vista de Enmarcha",
+  "description": "UI Workbench with RactiveJS",
   "license": "MIT",
   "ignore": [
     "**/.*",
@@ -13,14 +13,17 @@
     "test",
     "tests"
   ],
-  "devDependencies": {
-    "jquery": "~2.1.0",
+  "dependencies": {
+    "d3": "~3.4.8",
+    "foundation": "zurb/bower-foundation",
+    "requirejs": "~2.1.14",
+    "requirejs-ractive": "~0.1.5",
+    "ractive": "~0.4.0",
+    "jquery": "~2.1.1",
     "jquery-ui": "~1.10.4",
-    "ractive": "0.4.0",
-    "requirejs": "~2.1.11",
+    "backbone": "~1.1.2",
     "underscore": "~1.6.0",
     "ractive-backbone": "~0.1.0",
-    "backbone": "~1.1.2",
-    "backbone-deep-model": "~0.10.4" 
+    "backbone-deep-model": "~0.10.4"
   }
 }
