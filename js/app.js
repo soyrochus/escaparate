@@ -1,4 +1,4 @@
-/* global requirejs */
+/* globals requirejs  demoapp console */
 
 requirejs.config({
   baseUrl: 'js/libs',
@@ -50,8 +50,8 @@ requirejs.config({
   callback: function(){}
 });
 
-if (typeof booksapp === 'undefined'){
-  var booksapp = {
+if (typeof demoapp === 'undefined'){
+  var demoapp = {
     render: {
       baseUrl: '/public/',
       main: "#render-main"
@@ -60,7 +60,7 @@ if (typeof booksapp === 'undefined'){
 }
 
 
-requirejs(['jquery', 'Ractive', 'Backbone', 'encender', 'app/books'], function($, Ractive, Backbone, encender, books){
+requirejs(['jquery', 'Ractive', 'Backbone', 'rvc!app/books'], function($, Ractive, Backbone, BookView){
 
   var Router = Backbone.Router.extend({
 
@@ -71,10 +71,22 @@ requirejs(['jquery', 'Ractive', 'Backbone', 'encender', 'app/books'], function($
     },
 
     home: function() {
+
+
+    $.getJSON("/services/books", {} , function(data){
+
+      var view = new BookView({
+        el: demoapp.render.main,
+        data: data
+      })
+    }).error(function(error){
+
+      alert("Error: " + error);
+    });
+
       console.log("Home");
-      new Ractive({
-        el: booksapp.render.main,
-        template: '#template-home',
+      new BookView({
+        el: demoapp.render.main,
         data: {
           name: 'Books'
         }
@@ -82,36 +94,21 @@ requirejs(['jquery', 'Ractive', 'Backbone', 'encender', 'app/books'], function($
     },
 
     books: function(id) {
-      if(id){
-        //retrieve one particular book
-        booksapp.books.show(id);
-      } else{
-        //retrieve collection & display
-        if(!booksapp.books){
-          booksapp.books = new books.Collection();
-          booksapp.books.retrieveAll();
-        } else{
-          booksapp.books.showAll();
-        }
-      }
+
+      //
     }
 
   });
 
   $(function(){
-    booksapp.router = new Router();
-    encender.delegateNavigation('/', booksapp.router);
+    demoapp.router = new Router();
     /*
      * If your application is not being served from the root url / of your domain,
      * be sure to tell History where the root really is, as an option:
      * Backbone.history.start({pushState: true, root: "/public/search/"})
      */
-    Backbone.history.start({pushState: false, root: booksapp.baseUrl});
+    Backbone.history.start({pushState: false, root: demoapp.baseUrl});
 
-    var forward = encender.getQueryParams()['forward-url'];
-    if (forward){
-      booksapp.router.navigate(forward, {trigger: true});
-    }
 
   });
 
