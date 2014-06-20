@@ -1,0 +1,26 @@
+{
+  "name": "encender",
+  "version": "0.0.1",
+  "authors": [
+    "Iwan van der Kleijn <iwanvanderkleijn@gmail.com>"
+  ],
+  "description": "Capa de vista de Enmarcha",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "jquery": "~2.1.0",
+    "jquery-ui": "~1.10.4",
+    "ractive": "0.4.0",
+    "requirejs": "~2.1.11",
+    "underscore": "~1.6.0",
+    "ractive-backbone": "~0.1.0",
+    "backbone": "~1.1.2",
+    "backbone-deep-model": "~0.10.4" 
+  }
+}

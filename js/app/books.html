@@ -1,0 +1,59 @@
+
+<table class="book-table">
+    <tr><th>Id</th><th>Title</th><th>Series</th><th>Author</th></tr>
+    {{#books}}
+    <tr><td><a href="#/books/{{id}}">{{id}}</a></td><td>{{name}}</td><td>{{series_t}}</td><td>{{author}}</td></tr>
+    {{/books}}
+</table>
+
+<div class="book-fields" style="display:none;">
+  <label for="bookname">Name:</label><input name="bookname" value="{{form.name}}" />
+  <label for="bookauthor">Author:</label><input name="bookauthor" value="{{form.author}}"  />
+  <a on-click="back" href="#/books">&#9166; return to books</a> 
+</div>
+
+<style>
+ .book-fields input: {
+     width: 300px;
+     clear: right; 
+ }
+ 
+ .book-table {
+
+    border: 1px solid #CCC;
+  } 
+ 
+</style>
+
+<script>
+
+component.exports = {
+   beforeInit: function(options){
+     debugger;
+     console.log(options);
+   },
+   init: function(options){
+     debugger;
+     console.log(options);
+
+     this._table = this.find('table');
+     this._form = this.find('div');
+
+     this.on('back', function(){
+       this.activemodel.set(this.get('form').toJSON());
+       this.activemodel.save();
+     });
+   },
+   showForm: function(model){
+     $(this._table).hide();
+     $(this._form).show();
+     this.activemodel = model;
+     this.get('form').set(model.toJSON()); 
+   },
+   showTable: function(){
+     $(this._table).show();
+     $(this._form).hide();
+   }
+};
+
+</script>
